@@ -1,81 +1,73 @@
 package com.techwarriors.projectmanagementbackend.api.request;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 public class RegistrationRequest {
-    private String firstName;
-    private String lastName;
-    private String emailId;
-    private String password;
-    private String highestDegree;
-    private Date lastDegreeYear;
-    private String designation;
-    private String jobFamilyId;
+    private String employeePassword;
+    private Date employeeDoj;
+    private String employeeFirstName;
+    private String employeeLastName;
+    private String employeeGender;
+    private String empProfilePhotoUrl;
+    private String employeeCurrentProjectId;
 
-    public String getFirstName() {
-        return firstName;
+    public String getEmployeePassword() {
+        return employeePassword;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setEmployeePassword(String employeePassword) {
+        this.employeePassword = employeePassword;
     }
 
-    public String getLastName() {
-        return lastName;
+    public Date getEmployeeDoj() {
+        return employeeDoj;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setEmployeeDoj(Date employeeDoj) {
+        this.employeeDoj = employeeDoj;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public String getEmployeeFirstName() {
+        return employeeFirstName;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setEmployeeFirstName(String employeeFirstName) {
+        this.employeeFirstName = employeeFirstName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmployeeLastName() {
+        return employeeLastName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmployeeLastName(String employeeLastName) {
+        this.employeeLastName = employeeLastName;
     }
 
-    public String getHighestDegree() {
-        return highestDegree;
+    public String getEmployeeGender() {
+        return employeeGender;
     }
 
-    public void setHighestDegree(String highestDegree) {
-        this.highestDegree = highestDegree;
+    public void setEmployeeGender(String employeeGender) {
+        this.employeeGender = employeeGender;
     }
 
-    public Date getLastDegreeYear() {
-        return lastDegreeYear;
+    public String getEmpProfilePhotoUrl() {
+        return empProfilePhotoUrl;
     }
 
-    public void setLastDegreeYear(Date lastDegreeYear) {
-        this.lastDegreeYear = lastDegreeYear;
+    public void setEmpProfilePhotoUrl(String empProfilePhotoUrl) {
+        this.empProfilePhotoUrl = empProfilePhotoUrl;
     }
 
-    public String getDesignation() {
-        return designation;
+    public String getEmployeeCurrentProjectId() {
+        return employeeCurrentProjectId;
     }
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
+    public void setEmployeeCurrentProjectId(String employeeCurrentProjectId) {
+        this.employeeCurrentProjectId = employeeCurrentProjectId;
     }
-
-    public String getJobFamilyId() {
-        return jobFamilyId;
-    }
-
-    public void setJobFamilyId(String jobFamilyId) {
-        this.jobFamilyId = jobFamilyId;
-    }
-
-
-
 }

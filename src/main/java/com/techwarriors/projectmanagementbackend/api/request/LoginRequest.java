@@ -1,14 +1,14 @@
 package com.techwarriors.projectmanagementbackend.api.request;
 
 public class LoginRequest {
-    private String employeeId;
+    private Long employeeId;
     private String password;
 
-    public String getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(String employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 

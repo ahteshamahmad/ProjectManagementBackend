@@ -18,7 +18,7 @@ public class LoginService {
 
     public boolean isCredentialCorrect(LoginRequest loginRequest) {
         Optional<Employee> pass = employeeCredentialRepository.findById(loginRequest.getEmployeeId());
-        if (pass.isPresent() && pass.get().getPassword().equals(loginRequest.getPassword())) {
+        if (pass.isPresent() && pass.get().getEmployeePassword().equals(loginRequest.getPassword())) {
             return true;
         }
         return false;

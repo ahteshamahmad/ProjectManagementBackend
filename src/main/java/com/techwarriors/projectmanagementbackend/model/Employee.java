@@ -1,100 +1,33 @@
 package com.techwarriors.projectmanagementbackend.model;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.Date;
+import java.util.Set;
 
 @Entity(name = "employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "employee_id")
+    @Column(name = "emp_id")
     private Long employeeId;
-    @Column(name = "password")
-    private String password;
-    @Column(name="doj")
-    private Date doj;
-    @Column(name="firstName")
-    private String firstName;
-    @Column(name="lastName")
-    private String lastName;
-    @Column(name = "email_id", unique = true)
-    private String emailId;
+    @Column(name = "emp_password")
+    private String employeePassword;
+    @Column(name="emp_doj")
+    private Date employeeDoj;
+    @Column(name="emp_first_name")
+    private String employeeFirstName;
+    @Column(name="emp_last_Name")
+    private String employeeLastName;
+    @Column(name="emp_gender")
+    private String employeeGender;
+    @Column(name="emp_profile_photo_url")
+    private String empProfilePhotoUrl;
+    @Column(name="emp_current_project_id")
+    private String employeeCurrentProjectId;
 
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
-    @Column(name="highestDegree")
-    private String highestDegree;
-    @Column(name="lastDegreeYear")
-    private Date lastDegreeYear;
-    @Column(name="designation")
-    private String designation;
-    @Column(name="jobFamilyId")
-    private String jobFamilyId;
-
-    public String getJobFamilyId() {
-        return jobFamilyId;
-    }
-
-    public void setJobFamilyId(String jobFamilyId) {
-        this.jobFamilyId = jobFamilyId;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
-    public Date getLastDegreeYear() {
-        return lastDegreeYear;
-    }
-
-    public void setLastDegreeYear(Date lastDegreeYear) {
-        this.lastDegreeYear = lastDegreeYear;
-    }
-
-    public String getHighestDegree() {
-        return highestDegree;
-    }
-
-    public void setHighestDegree(String highestDegree) {
-        this.highestDegree = highestDegree;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public Employee() {
-    }
-
-    public Date getDoj() {
-        return doj;
-    }
-
-    public void setDoj(Date doj) {
-        this.doj = doj;
-    }
+    @OneToMany(mappedBy = "employee")
+    private Set<EmployeeSkills> employeeSkills;
 
     public Long getEmployeeId() {
         return employeeId;
@@ -104,12 +37,69 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmployeePassword() {
+        return employeePassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmployeePassword(String employeePassword) {
+        this.employeePassword = employeePassword;
     }
+
+    public Date getEmployeeDoj() {
+        return employeeDoj;
+    }
+
+    public void setEmployeeDoj(Date employeeDoj) {
+        this.employeeDoj = employeeDoj;
+    }
+
+    public String getEmployeeFirstName() {
+        return employeeFirstName;
+    }
+
+    public void setEmployeeFirstName(String employeeFirstName) {
+        this.employeeFirstName = employeeFirstName;
+    }
+
+    public String getEmployeeLastName() {
+        return employeeLastName;
+    }
+
+    public void setEmployeeLastName(String employeeLastName) {
+        this.employeeLastName = employeeLastName;
+    }
+
+    public String getEmployeeGender() {
+        return employeeGender;
+    }
+
+    public void setEmployeeGender(String employeeGender) {
+        this.employeeGender = employeeGender;
+    }
+
+    public String getEmpProfilePhotoUrl() {
+        return empProfilePhotoUrl;
+    }
+
+    public void setEmpProfilePhotoUrl(String empProfilePhotoUrl) {
+        this.empProfilePhotoUrl = empProfilePhotoUrl;
+    }
+
+    public String getEmployeeCurrentProjectId() {
+        return employeeCurrentProjectId;
+    }
+
+    public void setEmployeeCurrentProjectId(String employeeCurrentProjectId) {
+        this.employeeCurrentProjectId = employeeCurrentProjectId;
+    }
+
+    public Set<EmployeeSkills> getEmployeeSkills() {
+        return employeeSkills;
+    }
+
+    public void setEmployeeSkills(Set<EmployeeSkills> employeeSkills) {
+        this.employeeSkills = employeeSkills;
+    }
+
 }
 
