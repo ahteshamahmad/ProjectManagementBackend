@@ -1,40 +1,44 @@
 package com.techwarriors.projectmanagementbackend.model;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Entity(name="project")
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="project_id")
+    @Column(name = "project_id")
     private Long projectId;
-    @Column(name="project_title")
+    @Column(name = "project_title")
     private String projectTitle;
     @ManyToOne
     @JoinColumn(name = "project_type_id")
     private ProjectType projectType;
 
-    @Column(name="project_start_date")
-    private String projectStartDate;
-    @Column(name="project_end_date")
-    private String projectEndDate;
-    @Column(name="project_manager_id")
-    private String projectManagerId;
-    @Column(name="project_position")
-    private String projectPosition;
-    @Column(name="project_designation")
-    private String projectDesignation;
-    @Column(name="project_salary")
-    private String projectSalary;
-    @Column(name="project_active")
-    private boolean projectActive;
-    @Column(name="project_post_date")
-    private String projectPostDate;
+    @Column(name = "project_start_date")
+    private Date projectStartDate;
+    @Column(name = "project_end_date")
+    private Date projectEndDate;
 
-    @OneToOne(mappedBy = "project")
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    private Admin admin;
+
+    @Column(name = "total_position")
+    private int totalPosition;
+    @Column(name = "project_salary")
+    private int projectSalary;
+    @Column(name = "is_project_active")
+    private boolean isProjectActive;
+    @Column(name = "project_post_date")
+    private Date projectPostDate;
+
+    @OneToOne(mappedBy = "project", cascade = CascadeType.ALL)
     private ProjectDescription projectDescription;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private Set<ProjectSkills> projectSkills;
 
     public Long getProjectId() {
         return projectId;
@@ -60,71 +64,59 @@ public class Project {
         this.projectType = projectType;
     }
 
-    public boolean isProjectActive() {
-        return projectActive;
-    }
-
-    public String getProjectStartDate() {
+    public Date getProjectStartDate() {
         return projectStartDate;
     }
 
-    public void setProjectStartDate(String projectStartDate) {
+    public void setProjectStartDate(Date projectStartDate) {
         this.projectStartDate = projectStartDate;
     }
 
-    public String getProjectEndDate() {
+    public Date getProjectEndDate() {
         return projectEndDate;
     }
 
-    public void setProjectEndDate(String projectEndDate) {
+    public void setProjectEndDate(Date projectEndDate) {
         this.projectEndDate = projectEndDate;
     }
 
-    public String getProjectManagerId() {
-        return projectManagerId;
+    public Admin getAdmin() {
+        return admin;
     }
 
-    public void setProjectManagerId(String projectManagerId) {
-        this.projectManagerId = projectManagerId;
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 
-    public String getProjectPosition() {
-        return projectPosition;
+    public int getTotalPosition() {
+        return totalPosition;
     }
 
-    public void setProjectPosition(String projectPosition) {
-        this.projectPosition = projectPosition;
+    public void setTotalPosition(int totalPosition) {
+        this.totalPosition = totalPosition;
     }
 
-    public String getProjectDesignation() {
-        return projectDesignation;
-    }
-
-    public void setProjectDesignation(String projectDesignation) {
-        this.projectDesignation = projectDesignation;
-    }
-
-    public String getProjectSalary() {
+    public int getProjectSalary() {
         return projectSalary;
     }
 
-    public void setProjectSalary(String projectSalary) {
+    public void setProjectSalary(int projectSalary) {
         this.projectSalary = projectSalary;
     }
 
-    public boolean getProjectActive() {
-        return projectActive;
+    public boolean isProjectActive() {
+        return isProjectActive;
     }
 
     public void setProjectActive(boolean projectActive) {
-        this.projectActive = projectActive;
+        isProjectActive = projectActive;
     }
 
-    public String getProjectPostDate() {
+    public Date getProjectPostDate() {
         return projectPostDate;
     }
 
-    public void setProjectPostDate(String projectPostDate) {
+    public void setProjectPostDate(Date projectPostDate) {
         this.projectPostDate = projectPostDate;
     }
 
@@ -134,5 +126,17 @@ public class Project {
 
     public void setProjectDescription(ProjectDescription projectDescription) {
         this.projectDescription = projectDescription;
+        this.projectDescription.setProject(this);
+    }
+
+    public Set<ProjectSkills> getProjectSkills() {
+        return projectSkills;
+    }
+
+    public void setProjectSkills(Set<ProjectSkills> projectSkills) {
+        this.projectSkills = projectSkills;
+        for (ProjectSkills projectSkill : this.projectSkills) {
+            projectSkill.setProject(this);
+        }
     }
 }

@@ -1,15 +1,12 @@
-package com.techwarriors.projectmanagementbackend.model;
+package com.techwarriors.projectmanagementbackend.api.request;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Entity(name="project_type")
-public class ProjectType {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "project_type_id")
+public class ProjectTypeRequest {
     private Long projectTypeId;
-    @Column(name="project_type_name")
     private String projectTypeName;
 
     public Long getProjectTypeId() {

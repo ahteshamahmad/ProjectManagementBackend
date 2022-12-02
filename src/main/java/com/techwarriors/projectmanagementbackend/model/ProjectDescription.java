@@ -8,21 +8,16 @@ public class ProjectDescription {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "project_desc_id")
     private Long projectDescId;
+
+    @Column(name="description")
+    private String description;
+
+    @Column(name="role_and_responsibilities")
+    private String roleAndResponsibilities;
+
     @OneToOne
     @JoinColumn(name = "project_id")
     private Project project;
-    @Column(name="role_and_responsibilities")
-    private String roleAndResponsibilities;
-    @Column(name="skill_set_requirement")
-    private String skillSetRequirement;
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
 
     public String getRoleAndResponsibilities() {
         return roleAndResponsibilities;
@@ -32,14 +27,6 @@ public class ProjectDescription {
         this.roleAndResponsibilities = roleAndResposibilities;
     }
 
-    public String getSkillSetRequirement() {
-        return skillSetRequirement;
-    }
-
-    public void setSkillSetRequirement(String skillSetRequirement) {
-        this.skillSetRequirement = skillSetRequirement;
-    }
-
     public Long getProjectDescId() {
         return projectDescId;
     }
@@ -47,4 +34,17 @@ public class ProjectDescription {
     public void setProjectDescId(Long projectDescId) {
         this.projectDescId = projectDescId;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
 }

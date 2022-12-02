@@ -19,12 +19,15 @@ public class EmployeeSkills {
 
     @Column(name="knowledge_level")
     private String knowledgeLevel;
-    @Column(name="skills")
-    private String skills;
+
     @Column(name="experience_in_year")
-    private String experienceInYear;
-    @Column(name="extra_skill")
-    private String extraSkill;
+    private double experienceInYear;
+
+    @Column(name = "is_primary_skill")
+    private boolean isPrimarySkill;
+
+    @Column(name = "is_secondary_skill")
+    private boolean isSecondarySkill;
 
     public Employee getEmployee() {
         return employee;
@@ -50,29 +53,15 @@ public class EmployeeSkills {
         this.knowledgeLevel = knowledgeLevel;
     }
 
-    public String getSkills() {
-        return skills;
-    }
 
-    public void setSkills(String skills) {
-        this.skills = skills;
-    }
-
-    public String getExperienceInYear() {
+    public Double getExperienceInYear() {
         return experienceInYear;
     }
 
-    public void setExperienceInYear(String experienceInYear) {
+    public void setExperienceInYear(Double experienceInYear) {
         this.experienceInYear = experienceInYear;
     }
 
-    public String getExtraSkill() {
-        return extraSkill;
-    }
-
-    public void setExtraSkill(String extraSkill) {
-        this.extraSkill = extraSkill;
-    }
 
     public Long getEmpSkillId() {
         return empSkillId;
@@ -80,5 +69,21 @@ public class EmployeeSkills {
 
     public void setEmpSkillId(Long empSkillId) {
         this.empSkillId = empSkillId;
+    }
+
+    public boolean getIsPrimarySkill() {
+        return isPrimarySkill;
+    }
+
+    public void setIsPrimarySkill(boolean primarySkill) {
+        isPrimarySkill = primarySkill;
+    }
+
+    public boolean getIsSecondarySkill() {
+        return isSecondarySkill;
+    }
+
+    public void setIsSecondarySkill(boolean secondarySkill) {
+        isSecondarySkill = secondarySkill;
     }
 }

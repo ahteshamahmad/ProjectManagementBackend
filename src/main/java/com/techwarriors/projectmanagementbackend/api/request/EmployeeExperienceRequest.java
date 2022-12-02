@@ -1,34 +1,24 @@
-package com.techwarriors.projectmanagementbackend.model;
+package com.techwarriors.projectmanagementbackend.api.request;
+
+import com.techwarriors.projectmanagementbackend.model.Employee;
 
 import javax.persistence.*;
 
-@Entity(name="employee_experience")
-public class EmployeeExperience {
-    @ManyToOne
-    @JoinColumn(name = "emp_id")
-    private Employee employee;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class EmployeeExperienceRequest {
+    private Long employeeId;
     private Long employeeExperienceId;
-
-    @Column(name="start_date")
     private String startDate;
-    @Column(name="end_date")
     private String endDate;
-    @Column(name="project_title")
     private String projectTitle;
-    @Column(name="project_responsibility")
     private String projectResponsibility;
-    @Column(name="is_current")
     private boolean isCurrent;
 
-    public Employee getEmployee() {
-        return employee;
+    public Long getEmployee() {
+        return employeeId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployee(Long employee) {
+        this.employeeId = employeeId;
     }
 
     public Long getEmployeeExperienceId() {
@@ -75,9 +65,7 @@ public class EmployeeExperience {
         return isCurrent;
     }
 
-    public void setCurrent(boolean current) {
+    public void setIsCurrent(boolean current) {
         isCurrent = current;
     }
-
-
 }

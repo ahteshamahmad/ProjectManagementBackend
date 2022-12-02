@@ -1,24 +1,16 @@
-package com.techwarriors.projectmanagementbackend.model;
+package com.techwarriors.projectmanagementbackend.api.request;
+
+import com.techwarriors.projectmanagementbackend.model.Project;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity(name="admin")
-public class Admin {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="admin_id")
+public class AdminRequest {
     private Long adminId;
-
-    @Column(name="admin_first_name")
     private String adminFirstName;
-    @Column(name="admin_last_name")
     private String adminLastName;
-    @Column(name="admin_password")
     private String adminPassword;
-    @Column(name="admin_phone_num")
     private String adminPhoneNum;
-    @Column(name="admin_email_id")
     private String adminEmailId;
 
     public Long getAdminId() {
@@ -68,5 +60,4 @@ public class Admin {
     public void setAdminEmailId(String adminEmailId) {
         this.adminEmailId = adminEmailId;
     }
-
 }

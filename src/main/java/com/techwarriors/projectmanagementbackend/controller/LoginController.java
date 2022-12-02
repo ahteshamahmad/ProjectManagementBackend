@@ -17,10 +17,26 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity doLogin(@RequestBody LoginRequest loginRequest) {
+    @PostMapping("/admin/login")
+    public ResponseEntity doAdminLogin(@RequestBody LoginRequest loginRequest) {
         try {
-            boolean isLoginSuccessful = loginService.isCredentialCorrect(loginRequest);
+            boolean isLoginSuccessful = loginService.isCredentialCorrect(true, loginRequest);
+            if (isLoginSuccessful) {
+                return ResponseEntity.ok("Login is successful");
+            }
+            else {
+                return ResponseEntity.badRequest().body("bad credential");
+            }
+        }
+        catch(Exception exception) {
+            return ResponseEntity.status(500).body("Something went wrong");
+        }
+    }
+
+    @PostMapping("/employee/login")
+    public ResponseEntity doEmployeeLogin(@RequestBody LoginRequest loginRequest) {
+        try {
+            boolean isLoginSuccessful = loginService.isCredentialCorrect(false, loginRequest);
             if (isLoginSuccessful) {
                 return ResponseEntity.ok("Login is successful");
             }

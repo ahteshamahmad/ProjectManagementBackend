@@ -19,16 +19,11 @@ public class ProjectSkills {
 
     @Column(name="knowledge_level")
     private String knowledgeLevel;
-    @Column(name="key_skills")
-    private String keySkills;
+    @Column(name="is_mandatory_skill")
+    private boolean isMandatorySkill;
 
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
+    @Column(name="is_additional_skill")
+    private boolean isAdditionalSkill;
 
     public Skill getSkill() {
         return skill;
@@ -46,12 +41,20 @@ public class ProjectSkills {
         this.knowledgeLevel = knowledgeLevel;
     }
 
-    public String getKeySkills() {
-        return keySkills;
+    public boolean isMandatorySkill() {
+        return isMandatorySkill;
     }
 
-    public void setKeySkills(String keySkills) {
-        this.keySkills = keySkills;
+    public void setMandatorySkill(boolean mandatorySkill) {
+        isMandatorySkill = mandatorySkill;
+    }
+
+    public boolean isAdditionalSkill() {
+        return isAdditionalSkill;
+    }
+
+    public void setAdditionalSkill(boolean additionalSkill) {
+        isAdditionalSkill = additionalSkill;
     }
 
     public Long getProjectSkillId() {
@@ -60,5 +63,9 @@ public class ProjectSkills {
 
     public void setProjectSkillId(Long projectSkillId) {
         this.projectSkillId = projectSkillId;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

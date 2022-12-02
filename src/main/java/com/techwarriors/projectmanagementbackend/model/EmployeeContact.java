@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity(name="employee_contact")
 public class EmployeeContact {
     @OneToOne
+    @JoinColumn(name = "emp_id")
     private Employee employee;
 
     @Id
@@ -17,6 +18,9 @@ public class EmployeeContact {
 
     @Column(name="emp_phone_no")
     private String employeePhoneNumber;
+
+    @OneToOne(mappedBy = "employeeContact", cascade = CascadeType.ALL)
+    private EmployeeAddress employeeAddress;
 
     public Employee getEmployee() {
         return employee;
@@ -48,5 +52,10 @@ public class EmployeeContact {
 
     public void setEmployeePhoneNumber(String employeePhoneNumber) {
         this.employeePhoneNumber = employeePhoneNumber;
+    }
+
+    public void setEmployeeAddress(EmployeeAddress employeeAddress) {
+        this.employeeAddress = employeeAddress;
+        this.employeeAddress.setEmployeeContact(this);
     }
 }

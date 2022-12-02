@@ -12,9 +12,11 @@ public class EmployeeProject {
     private Long empProjectId;
 
     @ManyToOne
+    @JoinColumn(name = "project_id")
     private Project project;
 
     @ManyToOne
+    @JoinColumn(name = "emp_id")
     private Employee employee;
 
     @Column(name="apply_date")

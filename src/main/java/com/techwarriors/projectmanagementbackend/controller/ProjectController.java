@@ -2,6 +2,7 @@ package com.techwarriors.projectmanagementbackend.controller;
 
 import com.techwarriors.projectmanagementbackend.api.request.ProjectRequest;
 import com.techwarriors.projectmanagementbackend.model.Project;
+import com.techwarriors.projectmanagementbackend.model.ProjectDescription;
 import com.techwarriors.projectmanagementbackend.service.ProjectService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ public class ProjectController {
         this.projectService=projectService;
     }
     @PostMapping("/project")
-    public ResponseEntity doProject(@RequestBody ProjectRequest projectRequest){
+    public ResponseEntity createProject(@RequestBody ProjectRequest projectRequest){
         try {
             Long createdProjectId = projectService.createProject(projectRequest);
             return ResponseEntity.ok(createdProjectId);

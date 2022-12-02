@@ -1,12 +1,9 @@
 package com.techwarriors.projectmanagementbackend.api.request;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Date;
 
-public class RegistrationRequest {
+public class EmployeeRequest {
+    private String employeeId;
     private String employeePassword;
     private Date employeeDoj;
     private String employeeFirstName;
@@ -14,6 +11,14 @@ public class RegistrationRequest {
     private String employeeGender;
     private String empProfilePhotoUrl;
     private String employeeCurrentProjectId;
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
 
     public String getEmployeePassword() {
         return employeePassword;

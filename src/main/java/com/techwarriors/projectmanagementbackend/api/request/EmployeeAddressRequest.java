@@ -1,38 +1,18 @@
-package com.techwarriors.projectmanagementbackend.model;
+package com.techwarriors.projectmanagementbackend.api.request;
+
+import com.techwarriors.projectmanagementbackend.model.EmployeeContact;
 
 import javax.persistence.*;
 
-@Entity(name="employee_address")
-public class EmployeeAddress {
-    @OneToOne
-    @JoinColumn(name = "emp_contact_id")
+public class EmployeeAddressRequest {
     private EmployeeContact employeeContact;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="emp_address_id")
     private Long employeeAddressId;
-
-    @Column(name="first_address_line")
     private String firstAddressLine;
-
-
-    @Column(name="second_address_line")
     private String secondAddressLine;
-
-    @Column(name="landmark")
     private String landmark;
-
-    @Column(name="city")
     private String city;
-
-    @Column(name="state")
     private String state;
-
-    @Column(name="area_pin_code")
     private String areaPinCode;
-
-    @Column(name="country")
     private String country;
 
     public EmployeeContact getEmployeeContact() {
@@ -106,6 +86,4 @@ public class EmployeeAddress {
     public void setCountry(String country) {
         this.country = country;
     }
-
-
 }

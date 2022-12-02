@@ -9,9 +9,11 @@ public class EmployeeApplication {
     @Column(name = "emp_application_id")
     private Long empApplicationId;
     @ManyToOne
+    @JoinColumn(name = "emp_id")
     private Employee employee;
 
     @ManyToOne
+    @JoinColumn(name = "project_id")
     private Project project;
     @Column(name="project_is_active")
     private boolean projectIsActive;

@@ -1,45 +1,32 @@
-package com.techwarriors.projectmanagementbackend.model;
+package com.techwarriors.projectmanagementbackend.api.request;
 
-import javax.persistence.*;
+import com.techwarriors.projectmanagementbackend.enums.DegreeDivision;
+import com.techwarriors.projectmanagementbackend.enums.ScoreMeasurementType;
+import com.techwarriors.projectmanagementbackend.model.Employee;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
-@Entity(name="employee_education")
-public class EmployeeEducation {
-    @ManyToOne
-    @JoinColumn(name = "emp_id")
-    private Employee employee;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "emp_education_id")
-    private Long employeeEducationId;
-    @Column(name="major")
+public class EmployeeEducationRequest {
+    private Long employeeId;
     private String major;
-    @Column(name="start_date")
     private Date startDate;
-    @Column(name="end_date")
     private Date endDate;
-
-    @Column(name="completed_date")
     private Date completedDate;
-
-    @Column(name="score_measurement_type")
-    private String scoreMeasurementType;
-
-    @Column(name="score_value")
+    private ScoreMeasurementType scoreMeasurementType;
     private Double scoreValue;
-
-    @Column(name="division")
-    private String division;
-    @Column(name="univ_name")
+    private DegreeDivision division;
     private String univName;
 
-    public Employee getEmployee() {
-        return employee;
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getMajor() {
@@ -74,11 +61,11 @@ public class EmployeeEducation {
         this.completedDate = completedDate;
     }
 
-    public String getScoreMeasurementType() {
+    public ScoreMeasurementType getScoreMeasurementType() {
         return scoreMeasurementType;
     }
 
-    public void setScoreMeasurementType(String scoreMeasurementType) {
+    public void setScoreMeasurementType(ScoreMeasurementType scoreMeasurementType) {
         this.scoreMeasurementType = scoreMeasurementType;
     }
 
@@ -90,11 +77,11 @@ public class EmployeeEducation {
         this.scoreValue = scoreValue;
     }
 
-    public String getDivision() {
+    public DegreeDivision getDivision() {
         return division;
     }
 
-    public void setDivision(String division) {
+    public void setDivision(DegreeDivision division) {
         this.division = division;
     }
 
@@ -104,13 +91,5 @@ public class EmployeeEducation {
 
     public void setUnivName(String univName) {
         this.univName = univName;
-    }
-
-    public Long getEmployeeEducationId() {
-        return employeeEducationId;
-    }
-
-    public void setEmployeeEducationId(Long employeeEducationId) {
-        this.employeeEducationId = employeeEducationId;
     }
 }
