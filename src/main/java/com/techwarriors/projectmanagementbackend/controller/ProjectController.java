@@ -2,16 +2,16 @@ package com.techwarriors.projectmanagementbackend.controller;
 
 import com.techwarriors.projectmanagementbackend.api.request.ProjectApplicationRequest;
 import com.techwarriors.projectmanagementbackend.api.request.ProjectRequest;
-import com.techwarriors.projectmanagementbackend.api.response.EmployeeExperienceResponse;
-import com.techwarriors.projectmanagementbackend.api.response.GenericAPIResponse;
-import com.techwarriors.projectmanagementbackend.api.response.ProjectApplicationResponse;
-import com.techwarriors.projectmanagementbackend.api.response.ProjectResponse;
+import com.techwarriors.projectmanagementbackend.api.request.ProjectTypeRequest;
+import com.techwarriors.projectmanagementbackend.api.response.*;
 import com.techwarriors.projectmanagementbackend.model.Project;
 import com.techwarriors.projectmanagementbackend.model.ProjectDescription;
+import com.techwarriors.projectmanagementbackend.model.ProjectType;
 import com.techwarriors.projectmanagementbackend.service.ProjectService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 @RestController
 public class ProjectController {
@@ -95,6 +95,41 @@ public class ProjectController {
                 response.setMessage("EmployeeApplicationId not found");
                 return ResponseEntity.status(404).body(response);
             }
+            System.out.println(exception);
+            response.setMessage("Something went wrong!!, Please try again later");
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
+    @PostMapping("/project/project-type")
+    public ResponseEntity<GenericAPIResponse<ProjectTypeResponse>> createProjectType(@RequestBody ProjectTypeRequest projectTypeRequest){
+        GenericAPIResponse<ProjectTypeResponse> response = new GenericAPIResponse<>();
+        try {
+            Long createdProjectTypeId = projectService.createProjectType(projectTypeRequest);
+            ProjectTypeResponse projectTypeResponse = new ProjectTypeResponse();
+            projectTypeResponse.setProjectTypeId(createdProjectTypeId);
+            response.setMessage("ProjectType is created successfully");
+            response.setData(projectTypeResponse);
+            return ResponseEntity.ok(response);
+        }
+        catch (Exception exception) {
+            System.out.println(exception);
+            response.setMessage("Something went wrong!!, Please try again later");
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
+
+    @GetMapping("/project/project-type")
+    public ResponseEntity<GenericAPIResponse<List<ProjectType>>> getProjectType(){
+        GenericAPIResponse<List<ProjectType>> response = new GenericAPIResponse<>();
+        try {
+            List<ProjectType> allProjectType = projectService.getAllProjectType();
+            response.setMessage("Fetched all project type list successfully");
+            response.setData(allProjectType);
+            return ResponseEntity.ok(response);
+        }
+        catch (Exception exception) {
             System.out.println(exception);
             response.setMessage("Something went wrong!!, Please try again later");
             return ResponseEntity.status(500).body(response);

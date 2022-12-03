@@ -3,6 +3,7 @@ package com.techwarriors.projectmanagementbackend.service;
 import com.techwarriors.projectmanagementbackend.api.request.ProjectApplicationRequest;
 import com.techwarriors.projectmanagementbackend.api.request.ProjectRequest;
 import com.techwarriors.projectmanagementbackend.api.request.ProjectSkillRequest;
+import com.techwarriors.projectmanagementbackend.api.request.ProjectTypeRequest;
 import com.techwarriors.projectmanagementbackend.enums.ApplicationStatus;
 import com.techwarriors.projectmanagementbackend.model.*;
 import com.techwarriors.projectmanagementbackend.repository.*;
@@ -17,12 +18,14 @@ public class ProjectService {
     private final EmployeeProjectApplicationRepository employeeProjectApplicationRepository;
     private final EmployeeProjectRepository employeeProjectRepository;
     private final EmployeeRepository employeeRepository;
+    private final ProjectTypeRepository projectTypeRepository;
     public ProjectService(ProjectRepository projectRepository, EmployeeProjectApplicationRepository employeeProjectApplicationRepository,
-    EmployeeProjectRepository employeeProjectRepository, EmployeeRepository employeeRepository){
+    EmployeeProjectRepository employeeProjectRepository, EmployeeRepository employeeRepository, ProjectTypeRepository projectTypeRepository){
         this.projectRepository=projectRepository;
         this.employeeProjectApplicationRepository = employeeProjectApplicationRepository;
         this.employeeProjectRepository = employeeProjectRepository;
         this.employeeRepository = employeeRepository;
+        this.projectTypeRepository = projectTypeRepository;
     }
     public Long createProject(ProjectRequest projectRequest){
         Project project=new Project();
@@ -30,7 +33,6 @@ public class ProjectService {
         project.setProjectActive(projectRequest.isProjectActive());
         ProjectType projectType=new ProjectType();
         projectType.setProjectTypeId(projectRequest.getProjectType().getProjectTypeId());
-        projectType.setProjectTypeName(projectRequest.getProjectType().getProjectTypeName());
         project.setProjectType(projectType);
         project.setProjectStartDate(projectRequest.getProjectStartDate());
         project.setProjectEndDate(projectRequest.getProjectEndDate());
@@ -109,5 +111,16 @@ public class ProjectService {
             throw new RuntimeException("EmployeeApplicationId not found");
         }
         return employeeProjectApplicationId;
+    }
+
+    public Long createProjectType(ProjectTypeRequest projectTypeRequest) {
+        ProjectType projectType = new ProjectType();
+        projectType.setProjectTypeName(projectTypeRequest.getProjectTypeName());
+        ProjectType createdProjectType = projectTypeRepository.save(projectType);
+        return createdProjectType.getProjectTypeId();
+    }
+
+    public List<ProjectType> getAllProjectType() {
+        return projectTypeRepository.findAll();
     }
 }
