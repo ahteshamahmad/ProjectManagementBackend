@@ -1,6 +1,9 @@
 package com.techwarriors.projectmanagementbackend.controller;
 
 import com.techwarriors.projectmanagementbackend.api.request.ProjectRequest;
+import com.techwarriors.projectmanagementbackend.api.response.EmployeeExperienceResponse;
+import com.techwarriors.projectmanagementbackend.api.response.GenericAPIResponse;
+import com.techwarriors.projectmanagementbackend.api.response.ProjectResponse;
 import com.techwarriors.projectmanagementbackend.model.Project;
 import com.techwarriors.projectmanagementbackend.model.ProjectDescription;
 import com.techwarriors.projectmanagementbackend.service.ProjectService;
@@ -15,31 +18,42 @@ public class ProjectController {
         this.projectService=projectService;
     }
     @PostMapping("/project")
-    public ResponseEntity createProject(@RequestBody ProjectRequest projectRequest){
+    public ResponseEntity<GenericAPIResponse<ProjectResponse>> createProject(@RequestBody ProjectRequest projectRequest){
+        GenericAPIResponse<ProjectResponse> response = new GenericAPIResponse<>();
         try {
             Long createdProjectId = projectService.createProject(projectRequest);
-            return ResponseEntity.ok(createdProjectId);
+            ProjectResponse projectResponse = new ProjectResponse();
+            projectResponse.setProjectId(createdProjectId);
+            response.setMessage("Project is created successfully");
+            response.setData(projectResponse);
+            return ResponseEntity.ok(response);
         }
         catch (Exception exception) {
             System.out.println(exception);
-            return ResponseEntity.status(500).body("Internal Server Error");
+            response.setMessage("Something went wrong!!, Please try again later");
+            return ResponseEntity.status(500).body(response);
         }
     }
 
     @GetMapping("/project/{projectId}")
-    public ResponseEntity getProjectDetail(@PathVariable(name = "projectId") Long projectId){
+    public ResponseEntity<GenericAPIResponse<Project>> getProjectDetail(@PathVariable(name = "projectId") Long projectId){
+        GenericAPIResponse<Project> response = new GenericAPIResponse<>();
         try {
             Optional<Project> project = projectService.getProjectDetails(projectId);
             if (project.isPresent()) {
-                return ResponseEntity.ok(project);
+                response.setMessage("Project is found");
+                response.setData(project.get());
+                return ResponseEntity.ok(response);
             }
             else {
-                return ResponseEntity.notFound().build();
+                response.setMessage("Project is not found");
+                return ResponseEntity.status(404).body(response);
             }
         }
         catch (Exception exception) {
             System.out.println(exception);
-            return ResponseEntity.status(500).body("Internal Server Error");
+            response.setMessage("Internal Server Error");
+            return ResponseEntity.status(500).body(response);
         }
     }
 }

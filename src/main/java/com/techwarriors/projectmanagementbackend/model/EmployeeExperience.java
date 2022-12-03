@@ -23,10 +23,6 @@ public class EmployeeExperience {
     @Column(name="is_current")
     private boolean isCurrent;
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }

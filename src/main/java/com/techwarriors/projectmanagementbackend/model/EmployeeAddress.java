@@ -35,10 +35,6 @@ public class EmployeeAddress {
     @Column(name="country")
     private String country;
 
-    public EmployeeContact getEmployeeContact() {
-        return employeeContact;
-    }
-
     public void setEmployeeContact(EmployeeContact employeeContact) {
         this.employeeContact = employeeContact;
     }

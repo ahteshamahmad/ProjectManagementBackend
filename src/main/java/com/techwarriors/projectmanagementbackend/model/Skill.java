@@ -31,13 +31,4 @@ public class Skill {
         this.skillName = skillName;
     }
 
-    public Set<EmployeeSkills> getEmployeeSkillsSet() {
-        return employeeSkillsSet;
-    }
-
-    public void setEmployeeSkillsSet(Set<EmployeeSkills> employeeSkillsSet) {
-        this.employeeSkillsSet = employeeSkillsSet;
-    }
-
-
 }

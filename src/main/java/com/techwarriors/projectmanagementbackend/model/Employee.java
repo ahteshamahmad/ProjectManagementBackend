@@ -27,7 +27,16 @@ public class Employee {
     private String employeeCurrentProjectId;
 
     @OneToMany(mappedBy = "employee")
+    private Set<EmployeeExperience> employeeExperiences;
+
+    @OneToMany(mappedBy = "employee")
     private Set<EmployeeSkills> employeeSkills;
+
+    @OneToOne(mappedBy = "employee")
+    private EmployeeContact employeeContact;
+
+    @OneToMany(mappedBy = "employee")
+    private Set<EmployeeEducation> employeeEducations;
 
     public Long getEmployeeId() {
         return employeeId;
@@ -97,9 +106,16 @@ public class Employee {
         return employeeSkills;
     }
 
-    public void setEmployeeSkills(Set<EmployeeSkills> employeeSkills) {
-        this.employeeSkills = employeeSkills;
+    public Set<EmployeeExperience> getEmployeeExperiences() {
+        return employeeExperiences;
     }
 
+    public EmployeeContact getEmployeeContact() {
+        return employeeContact;
+    }
+
+    public Set<EmployeeEducation> getEmployeeEducations() {
+        return employeeEducations;
+    }
 }
 

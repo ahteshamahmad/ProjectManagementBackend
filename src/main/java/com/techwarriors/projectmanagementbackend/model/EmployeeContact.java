@@ -22,10 +22,6 @@ public class EmployeeContact {
     @OneToOne(mappedBy = "employeeContact", cascade = CascadeType.ALL)
     private EmployeeAddress employeeAddress;
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
@@ -57,5 +53,9 @@ public class EmployeeContact {
     public void setEmployeeAddress(EmployeeAddress employeeAddress) {
         this.employeeAddress = employeeAddress;
         this.employeeAddress.setEmployeeContact(this);
+    }
+
+    public EmployeeAddress getEmployeeAddress() {
+        return employeeAddress;
     }
 }

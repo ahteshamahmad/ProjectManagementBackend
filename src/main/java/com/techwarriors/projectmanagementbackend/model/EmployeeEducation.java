@@ -34,10 +34,6 @@ public class EmployeeEducation {
     @Column(name="univ_name")
     private String univName;
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }

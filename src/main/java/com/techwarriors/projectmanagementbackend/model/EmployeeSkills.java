@@ -29,10 +29,6 @@ public class EmployeeSkills {
     @Column(name = "is_secondary_skill")
     private boolean isSecondarySkill;
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
