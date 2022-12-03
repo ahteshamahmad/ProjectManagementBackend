@@ -184,7 +184,7 @@ public class EmployeeController {
         }
         catch (Exception exception) {
             System.out.println(exception);
-            if (exception.getMessage().equals("Employee Not Found")) {
+            if (exception.getMessage()!=null && exception.getMessage().equals("Employee Not Found")) {
                 response.setMessage("Employee Not Found");
                 return ResponseEntity.status(404).body(response);
             }

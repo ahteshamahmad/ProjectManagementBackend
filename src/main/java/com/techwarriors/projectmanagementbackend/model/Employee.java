@@ -1,5 +1,7 @@
 package com.techwarriors.projectmanagementbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.sql.Blob;
 import java.util.Date;
@@ -23,8 +25,9 @@ public class Employee {
     private String employeeGender;
     @Column(name="emp_profile_photo_url")
     private String empProfilePhotoUrl;
-    @Column(name="emp_current_project_id")
-    private String employeeCurrentProjectId;
+
+    @OneToMany(mappedBy = "employee")
+    private Set<EmployeeProject> employeeProjects;
 
     @OneToMany(mappedBy = "employee")
     private Set<EmployeeExperience> employeeExperiences;
@@ -37,6 +40,9 @@ public class Employee {
 
     @OneToMany(mappedBy = "employee")
     private Set<EmployeeEducation> employeeEducations;
+
+    @OneToMany(mappedBy = "employee")
+    private Set<EmployeeProjectApplication> employeeProjectApplications;
 
     public Long getEmployeeId() {
         return employeeId;
@@ -94,14 +100,6 @@ public class Employee {
         this.empProfilePhotoUrl = empProfilePhotoUrl;
     }
 
-    public String getEmployeeCurrentProjectId() {
-        return employeeCurrentProjectId;
-    }
-
-    public void setEmployeeCurrentProjectId(String employeeCurrentProjectId) {
-        this.employeeCurrentProjectId = employeeCurrentProjectId;
-    }
-
     public Set<EmployeeSkills> getEmployeeSkills() {
         return employeeSkills;
     }
@@ -117,5 +115,34 @@ public class Employee {
     public Set<EmployeeEducation> getEmployeeEducations() {
         return employeeEducations;
     }
+
+    public Set<EmployeeProjectApplication> getEmployeeProjectApplications() {
+        return employeeProjectApplications;
+    }
+
+
+
+//    public EmployeeProject getEmployeeCurrentProject() {
+//        Date maxDate = null;
+//        EmployeeProject latestProject = null;
+//        for (EmployeeProject employeeProject : this.employeeCurrentProject) {
+//            if (maxDate == null) {
+//                maxDate = employeeProject.getProjectAssignDate();
+//                latestProject = employeeProject;
+//            }
+//            else {
+//                if (maxDate.before(employeeProject.getProjectAssignDate())) {
+//                    maxDate = employeeProject.getProjectAssignDate();
+//                    latestProject = employeeProject;
+//                }
+//            }
+//        }
+//        return latestProject;
+//    }
+
+
+//    public Set<EmployeeProject> getEmployeeProjects() {
+//        return employeeProjects;
+//    }
 }
 

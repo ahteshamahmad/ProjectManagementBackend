@@ -10,7 +10,6 @@ public class EmployeeRequest {
     private String employeeLastName;
     private String employeeGender;
     private String empProfilePhotoUrl;
-    private String employeeCurrentProjectId;
 
     public String getEmployeeId() {
         return employeeId;
@@ -68,11 +67,4 @@ public class EmployeeRequest {
         this.empProfilePhotoUrl = empProfilePhotoUrl;
     }
 
-    public String getEmployeeCurrentProjectId() {
-        return employeeCurrentProjectId;
-    }
-
-    public void setEmployeeCurrentProjectId(String employeeCurrentProjectId) {
-        this.employeeCurrentProjectId = employeeCurrentProjectId;
-    }
 }

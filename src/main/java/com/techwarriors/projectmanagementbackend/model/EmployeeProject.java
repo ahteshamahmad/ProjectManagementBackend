@@ -1,5 +1,7 @@
 package com.techwarriors.projectmanagementbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,20 +15,19 @@ public class EmployeeProject {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
+    @JsonIgnoreProperties("employeeProjects")
     private Project project;
 
     @ManyToOne
     @JoinColumn(name = "emp_id")
+    @JsonIgnoreProperties("employeeProjects")
     private Employee employee;
 
     @Column(name="apply_date")
     private Date applyDate;
-    @Column(name="project_title")
-    private String projectTitle;
-    @Column(name="project_position")
-    private String projectPosition;
-    @Column(name="project_head_count")
-    private int projectHeadCount;
+
+    @Column(name="project_assign_date")
+    private Date projectAssignDate;
 
     public Project getProject() {
         return project;
@@ -52,35 +53,19 @@ public class EmployeeProject {
         this.applyDate = applyDate;
     }
 
-    public String getProjectTitle() {
-        return projectTitle;
-    }
-
-    public void setProjectTitle(String projectTitle) {
-        this.projectTitle = projectTitle;
-    }
-
-    public String getProjectPosition() {
-        return projectPosition;
-    }
-
-    public void setProjectPosition(String projectPosition) {
-        this.projectPosition = projectPosition;
-    }
-
-    public int getProjectHeadCount() {
-        return projectHeadCount;
-    }
-
-    public void setProjectHeadCount(int projectHeadCount) {
-        this.projectHeadCount = projectHeadCount;
-    }
-
     public Long getEmpProjectId() {
         return empProjectId;
     }
 
     public void setEmpProjectId(Long empProjectId) {
         this.empProjectId = empProjectId;
+    }
+
+    public Date getProjectAssignDate() {
+        return projectAssignDate;
+    }
+
+    public void setProjectAssignDate(Date projectAssignDate) {
+        this.projectAssignDate = projectAssignDate;
     }
 }

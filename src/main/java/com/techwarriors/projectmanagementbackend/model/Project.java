@@ -40,6 +40,12 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<ProjectSkills> projectSkills;
 
+    @OneToMany(mappedBy = "project")
+    private Set<EmployeeProjectApplication> employeeProjectApplications;
+
+    @OneToMany(mappedBy = "project")
+    private Set<EmployeeProject> employeeProjects;
+
     public Long getProjectId() {
         return projectId;
     }
@@ -138,5 +144,9 @@ public class Project {
         for (ProjectSkills projectSkill : this.projectSkills) {
             projectSkill.setProject(this);
         }
+    }
+
+    public Set<EmployeeProjectApplication> getEmployeeProjectApplications() {
+        return employeeProjectApplications;
     }
 }

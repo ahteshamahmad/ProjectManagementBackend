@@ -41,7 +41,6 @@ public class EmployeeService {
         employee.setEmployeeFirstName(employeeRequest.getEmployeeFirstName());
         employee.setEmployeeLastName(employeeRequest.getEmployeeLastName());
         employee.setEmployeeGender(employeeRequest.getEmployeeGender());
-        employee.setEmployeeCurrentProjectId(null);
         employee.setEmployeePassword(employeeRequest.getEmployeePassword());
         employee.setEmpProfilePhotoUrl(employeeRequest.getEmpProfilePhotoUrl());
         Employee createdEmployee = employeeRepository.save(employee);
@@ -133,7 +132,6 @@ public class EmployeeService {
             employeeObject.setEmployeeFirstName(employeeRequest.getEmployeeFirstName());
             employeeObject.setEmployeeLastName(employeeRequest.getEmployeeLastName());
             employeeObject.setEmployeeGender(employeeRequest.getEmployeeGender());
-            employeeObject.setEmployeeCurrentProjectId(employeeRequest.getEmployeeCurrentProjectId());
             employeeObject.setEmployeePassword(employeeRequest.getEmployeePassword());
             employeeObject.setEmpProfilePhotoUrl(employeeRequest.getEmpProfilePhotoUrl());
             return employeeRepository.save(employeeObject).getEmployeeId();
