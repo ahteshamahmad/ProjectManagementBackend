@@ -3,6 +3,7 @@ package com.techwarriors.projectmanagementbackend.controller;
 import com.techwarriors.projectmanagementbackend.api.request.*;
 import com.techwarriors.projectmanagementbackend.api.response.*;
 import com.techwarriors.projectmanagementbackend.model.Employee;
+import com.techwarriors.projectmanagementbackend.model.Project;
 import com.techwarriors.projectmanagementbackend.service.EmployeeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -167,6 +168,26 @@ public class EmployeeController {
             return ResponseEntity.ok(response);
         } catch (Exception exception) {
             System.out.println(exception);
+            response.setMessage("Something went wrong!!, Please try again later");
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
+    @GetMapping("/employee/{employeeId}/match/project")
+    public ResponseEntity<GenericAPIResponse<List<Project>>> getAllMatchedProject(@PathVariable (name = "employeeId") Long employeeId) {
+        GenericAPIResponse<List<Project>> response = new GenericAPIResponse<>();
+        try {
+            List<Project> allMatchingProject = employeeService.getAllMatchingProject(employeeId);
+            response.setMessage("Matching Project Details");
+            response.setData(allMatchingProject);
+            return ResponseEntity.ok(response);
+        }
+        catch (Exception exception) {
+            System.out.println(exception);
+            if (exception.getMessage().equals("Employee Not Found")) {
+                response.setMessage("Employee Not Found");
+                return ResponseEntity.status(404).body(response);
+            }
             response.setMessage("Something went wrong!!, Please try again later");
             return ResponseEntity.status(500).body(response);
         }

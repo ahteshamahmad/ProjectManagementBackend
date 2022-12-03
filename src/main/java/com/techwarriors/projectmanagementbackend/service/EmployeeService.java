@@ -17,16 +17,22 @@ public class EmployeeService {
 
     private final EmployeeSkillsRepository employeeSkillsRepository;
 
+    private final ProjectRepository projectRepository;
+
+    private static final double PRIMARY_PROJECT_MATCHING_PERCENTAGE_THRESHOLD = 60;
+
 
     public EmployeeService(EmployeeRepository employeeRepository, EmployeeContactRepository employeeContactRepository,
                            EmployeeEducationRepository employeeEducationRepository,
                            EmployeeExperienceRepository employeeExperienceRepository,
-                           EmployeeSkillsRepository employeeSkillsRepository) {
+                           EmployeeSkillsRepository employeeSkillsRepository,
+                           ProjectRepository projectRepository) {
         this.employeeRepository = employeeRepository;
         this.employeeContactRepository = employeeContactRepository;
         this.employeeEducationRepository = employeeEducationRepository;
         this.employeeExperienceRepository = employeeExperienceRepository;
         this.employeeSkillsRepository = employeeSkillsRepository;
+        this.projectRepository = projectRepository;
     }
 
     public Long doRegister(EmployeeRequest employeeRequest){
@@ -135,5 +141,46 @@ public class EmployeeService {
         else {
             throw new Exception("Employee not found");
         }
+    }
+
+    public List<Project> getAllMatchingProject(Long employeeId) {
+        List<Project> allMatchedProject = new ArrayList<>();
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
+        if (optionalEmployee.isPresent()) {
+            Employee employee = optionalEmployee.get();
+            Set<EmployeeSkills> employeeSkills = employee.getEmployeeSkills();
+            Map<Long, EmployeeSkills> employeeSkillMap = new HashMap<>();
+            for(EmployeeSkills nextEmployeeSkill : employeeSkills) {
+                employeeSkillMap.put(nextEmployeeSkill.getSkill().getSkillId(), nextEmployeeSkill);
+            }
+            List<Project> projects = projectRepository.findAll();
+            for(Project project : projects) {
+                int totalPrimarySkill = 0;
+                int matchPrimarySkillCount = 0;
+                Set<ProjectSkills> projectSkills = project.getProjectSkills();
+                for (ProjectSkills nextProjectSkill : projectSkills) {
+                    if (nextProjectSkill.isMandatorySkill()) {
+                        totalPrimarySkill+=1;
+                    }
+                    if (employeeSkillMap.containsKey(nextProjectSkill.getSkill().getSkillId())) {
+                        EmployeeSkills employeeSkill = employeeSkillMap.get(nextProjectSkill.getSkill().getSkillId());
+                        if (nextProjectSkill.getKnowledgeLevel().equals(employeeSkill.getKnowledgeLevel())
+                        && nextProjectSkill.isMandatorySkill() == employeeSkill.getIsPrimarySkill()) {
+                            matchPrimarySkillCount+=1;
+                        }
+                    }
+                }
+                if (projectSkills.size() !=0 && totalPrimarySkill > 0) {
+                    double matchPrimarySkillPercentage = (matchPrimarySkillCount / totalPrimarySkill) * 100;
+                    if (matchPrimarySkillPercentage >= PRIMARY_PROJECT_MATCHING_PERCENTAGE_THRESHOLD) {
+                        allMatchedProject.add(project);
+                    }
+                }
+            }
+        }
+        else {
+            throw new RuntimeException("Employee Not Found");
+        }
+        return allMatchedProject;
     }
 }
