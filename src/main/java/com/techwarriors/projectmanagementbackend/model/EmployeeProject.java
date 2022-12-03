@@ -15,12 +15,12 @@ public class EmployeeProject {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    @JsonIgnoreProperties("employeeProjects")
+    @JsonIgnoreProperties({"assignedEmployees", "employeeProjectApplications"})
     private Project project;
 
     @ManyToOne
     @JoinColumn(name = "emp_id")
-    @JsonIgnoreProperties("employeeProjects")
+    @JsonIgnoreProperties({"employeeCurrentProjects", "employeeProjectApplications"})
     private Employee employee;
 
     @Column(name="apply_date")
@@ -29,17 +29,11 @@ public class EmployeeProject {
     @Column(name="project_assign_date")
     private Date projectAssignDate;
 
-    public Project getProject() {
-        return project;
-    }
 
     public void setProject(Project project) {
         this.project = project;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
@@ -67,5 +61,17 @@ public class EmployeeProject {
 
     public void setProjectAssignDate(Date projectAssignDate) {
         this.projectAssignDate = projectAssignDate;
+    }
+
+//    public Project getProject() {
+//        return project;
+//    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public Project getProject() {
+        return project;
     }
 }

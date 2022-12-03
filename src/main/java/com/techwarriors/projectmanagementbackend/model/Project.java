@@ -44,7 +44,7 @@ public class Project {
     private Set<EmployeeProjectApplication> employeeProjectApplications;
 
     @OneToMany(mappedBy = "project")
-    private Set<EmployeeProject> employeeProjects;
+    private Set<EmployeeProject> assignedEmployees;
 
     public Long getProjectId() {
         return projectId;
@@ -148,5 +148,9 @@ public class Project {
 
     public Set<EmployeeProjectApplication> getEmployeeProjectApplications() {
         return employeeProjectApplications;
+    }
+
+    public Set<EmployeeProject> getAssignedEmployees() {
+        return assignedEmployees;
     }
 }

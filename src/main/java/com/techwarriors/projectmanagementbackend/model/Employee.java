@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.sql.Blob;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "employee")
@@ -27,7 +28,7 @@ public class Employee {
     private String empProfilePhotoUrl;
 
     @OneToMany(mappedBy = "employee")
-    private Set<EmployeeProject> employeeProjects;
+    private Set<EmployeeProject> employeeCurrentProjects;
 
     @OneToMany(mappedBy = "employee")
     private Set<EmployeeExperience> employeeExperiences;
@@ -120,29 +121,26 @@ public class Employee {
         return employeeProjectApplications;
     }
 
-
-
-//    public EmployeeProject getEmployeeCurrentProject() {
-//        Date maxDate = null;
-//        EmployeeProject latestProject = null;
-//        for (EmployeeProject employeeProject : this.employeeCurrentProject) {
-//            if (maxDate == null) {
-//                maxDate = employeeProject.getProjectAssignDate();
-//                latestProject = employeeProject;
-//            }
-//            else {
-//                if (maxDate.before(employeeProject.getProjectAssignDate())) {
-//                    maxDate = employeeProject.getProjectAssignDate();
-//                    latestProject = employeeProject;
-//                }
-//            }
-//        }
-//        return latestProject;
-//    }
-
-
-//    public Set<EmployeeProject> getEmployeeProjects() {
-//        return employeeProjects;
-//    }
+    public Set<EmployeeProject> getEmployeeCurrentProjects() {
+        Set<EmployeeProject> latestProjectSet = new HashSet<>();
+        Date maxDate = null;
+        EmployeeProject latestProject = null;
+        for (EmployeeProject employeeProject : employeeCurrentProjects) {
+            if (maxDate == null) {
+                maxDate = employeeProject.getProjectAssignDate();
+                latestProject = employeeProject;
+            }
+            else {
+                if (maxDate.before(employeeProject.getProjectAssignDate())) {
+                    maxDate = employeeProject.getProjectAssignDate();
+                    latestProject = employeeProject;
+                }
+            }
+        }
+        if (latestProject != null) {
+            latestProjectSet.add(latestProject);
+        }
+        return latestProjectSet;
+    }
 }
 

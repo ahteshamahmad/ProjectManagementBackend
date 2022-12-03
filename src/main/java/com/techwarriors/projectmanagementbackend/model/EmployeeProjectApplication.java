@@ -13,12 +13,12 @@ public class EmployeeProjectApplication {
     private Long empApplicationId;
     @ManyToOne
     @JoinColumn(name = "emp_id")
-    @JsonIgnoreProperties("employeeProjectApplications")
+    @JsonIgnoreProperties({"employeeCurrentProjects", "employeeProjectApplications"})
     private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    @JsonIgnoreProperties("employeeProjectApplications")
+    @JsonIgnoreProperties({"assignedEmployees", "employeeProjectApplications"})
     private Project project;
     @Column(name="application_status")
     private String applicationStatus;
