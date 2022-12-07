@@ -60,4 +60,16 @@ public class AdminRequest {
     public void setAdminEmailId(String adminEmailId) {
         this.adminEmailId = adminEmailId;
     }
+
+    @Override
+    public String toString() {
+        return "AdminRequest{" +
+                "adminId=" + adminId +
+                ", adminFirstName='" + adminFirstName + '\'' +
+                ", adminLastName='" + adminLastName + '\'' +
+                ", adminPassword='" + adminPassword + '\'' +
+                ", adminPhoneNum='" + adminPhoneNum + '\'' +
+                ", adminEmailId='" + adminEmailId + '\'' +
+                '}';
+    }
 }

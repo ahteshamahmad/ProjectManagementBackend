@@ -1,12 +1,10 @@
 package com.techwarriors.projectmanagementbackend.controller;
 
 import com.techwarriors.projectmanagementbackend.api.request.LoginRequest;
+import com.techwarriors.projectmanagementbackend.api.response.GenericAPIResponse;
 import com.techwarriors.projectmanagementbackend.service.LoginService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -19,33 +17,41 @@ public class LoginController {
 
     @PostMapping("/admin/login")
     public ResponseEntity doAdminLogin(@RequestBody LoginRequest loginRequest) {
+        GenericAPIResponse<String> response = new GenericAPIResponse<>();
         try {
             boolean isLoginSuccessful = loginService.isCredentialCorrect(true, loginRequest);
             if (isLoginSuccessful) {
-                return ResponseEntity.ok("Login is successful");
+                response.setMessage("Login is successful");
+                return ResponseEntity.ok(response);
             }
             else {
-                return ResponseEntity.badRequest().body("bad credential");
+                response.setMessage("Bad Credential");
+                return ResponseEntity.status(400).body(response);
             }
         }
         catch(Exception exception) {
-            return ResponseEntity.status(500).body("Something went wrong");
+            response.setMessage("Something went wrong");
+            return ResponseEntity.status(500).body(response);
         }
     }
 
     @PostMapping("/employee/login")
-    public ResponseEntity doEmployeeLogin(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<GenericAPIResponse<String>> doEmployeeLogin(@RequestBody LoginRequest loginRequest) {
+        GenericAPIResponse<String> response = new GenericAPIResponse<>();
         try {
             boolean isLoginSuccessful = loginService.isCredentialCorrect(false, loginRequest);
             if (isLoginSuccessful) {
-                return ResponseEntity.ok("Login is successful");
+                response.setMessage("Login is successful");
+                return ResponseEntity.ok(response);
             }
             else {
-                return ResponseEntity.badRequest().body("bad credential");
+                response.setMessage("Bad Credential");
+                return ResponseEntity.status(400).body(response);
             }
         }
         catch(Exception exception) {
-            return ResponseEntity.status(500).body("Something went wrong");
+            response.setMessage("Something went wrong");
+            return ResponseEntity.status(500).body(response);
         }
     }
 }
